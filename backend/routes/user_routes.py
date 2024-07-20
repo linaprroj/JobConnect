@@ -21,7 +21,13 @@ def get_user_by_id(id):
 @user_bp.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json()
-    new_user = User(username=data['username'], email=data['email'])
+    new_user = User(
+        name=data['name'],
+        email=data['email'],
+        password=data['password'],
+        user_type=data['user_type'],
+        contact_info=data.get('contact_info', '')
+    )
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.to_dict()), 201
@@ -31,8 +37,11 @@ def create_user():
 def update_user(id):
     user = User.query.get_or_404(id)
     data = request.get_json()
-    user.username = data.get('username', user.username)
+    user.name = data.get('name', user.name)
     user.email = data.get('email', user.email)
+    user.password = data.get('password', user.password)
+    user.user_type = data.get('user_type', user.user_type)
+    user.contact_info = data.get('contact_info', user.contact_info)
     db.session.commit()
     return jsonify(user.to_dict())
 
@@ -43,14 +52,3 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return jsonify({'message': 'User deleted successfully'}), 204
-
-# Helper method to convert User object to dictionary
-def to_dict(self):
-    return {
-        'id': self.id,
-        'username': self.username,
-        'email': self.email
-    }
-
-# Add to_dict method to User model
-User.to_dict = to_dict
