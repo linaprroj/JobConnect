@@ -18,7 +18,7 @@ const Header: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link href="/jobseeker" className={styles.nav_link}>
+              <Link href="/joblist" className={styles.nav_link}>
                 Jobs
               </Link>
             </li>
@@ -37,8 +37,13 @@ const Header: React.FC = () => {
       </div>
       <div className={styles.right_side}>
         <div className={styles.button_styles}>
-          <button className={styles.button}>Log in</button>
-          <button className={styles.button}>Sign up</button>
+          <Link href="/auth">
+            <button className={styles.button}>Log in</button>
+          </Link>
+
+          <Link href="/auth">
+            <button className={styles.button}>Sign up</button>
+          </Link>
         </div>
       </div>
     </div>
