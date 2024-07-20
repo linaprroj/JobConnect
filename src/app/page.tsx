@@ -1,8 +1,9 @@
 import { NextPage } from "next";
-import JobCard from "../../components/JobCard/JobCard";
+import Header from "../../components/Header/Header";
 const HomePage: NextPage = () => {
   return (
     <div>
+      <Header />
       <h1>This is Home Page</h1>
     </div>
   );
