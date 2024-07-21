@@ -6,6 +6,7 @@ type JobCardProps = {
   company: string;
   location: string;
   salary: string;
+  onClickApply: () => void;
 };
 
 const JobCard: React.FC<JobCardProps> = ({
@@ -13,6 +14,7 @@ const JobCard: React.FC<JobCardProps> = ({
   company,
   location,
   salary,
+  onClickApply,
 }) => {
   return (
     <div className={styles.card}>
@@ -23,7 +25,9 @@ const JobCard: React.FC<JobCardProps> = ({
         <p>Salary: ${salary}</p>
       </div>
       <div>
-        <button className={styles.button}>Apply Now</button>
+        <button className={styles.button} onClick={onClickApply}>
+          Apply Now
+        </button>
       </div>
     </div>
   );

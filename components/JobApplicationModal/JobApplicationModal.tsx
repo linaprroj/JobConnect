@@ -2,7 +2,15 @@
 import React, { useState } from "react";
 import styles from "../JobApplicationModal/JobApplicationModal.module.css";
 
-const JobApplicationModal: React.FC = () => {
+type JobApplicationProps = {
+  onClose: () => void;
+  onSubmit: () => void;
+};
+
+const JobApplicationModal: React.FC<JobApplicationProps> = ({
+  onClose,
+  onSubmit,
+}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -48,16 +56,12 @@ const JobApplicationModal: React.FC = () => {
     }
   };
 
-  const handleClose = () => {
-    alert("Add Modal close logic");
-  };
-
   return (
     <>
       <div className={styles.container}>
         <div className={styles.modal}>
           <h1>Job Application Form</h1>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={onSubmit}>
             <div className={styles.inputsContainer}>
               <p>First Name</p>
               <label htmlFor="firstName">
@@ -132,11 +136,7 @@ const JobApplicationModal: React.FC = () => {
               </label>
             </div>
             <div className={styles.button_styles}>
-              <button
-                type="button"
-                className={styles.button}
-                onClick={handleClose}
-              >
+              <button type="button" className={styles.button} onClick={onClose}>
                 Close
               </button>
               <button className={styles.button} type="submit">
