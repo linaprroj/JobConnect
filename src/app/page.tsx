@@ -1,7 +1,8 @@
 import { NextPage } from "next";
 import Header from "../../components/Header/Header";
 import Link from "next/link";
-import styles from "../../styles/page.module.css";
+import styles from "../../styles/HomePage.module.css";
+
 const HomePage: NextPage = () => {
   return (
     <>
@@ -13,7 +14,7 @@ const HomePage: NextPage = () => {
           <Link href="/joblist">
             <button className={styles.button}>JobSeeker</button>
           </Link>
-          <Link href="/recruiter">
+          <Link href="/recruiter/dashboard">
             <button className={styles.button}>Recruiters</button>
           </Link>
         </div>
@@ -23,3 +24,10 @@ const HomePage: NextPage = () => {
 };
 
 export default HomePage;
+
+
+
+
+
+
+

@@ -2,7 +2,15 @@
 import React, { useState } from "react";
 import styles from "../JobApplicationModal/JobApplicationModal.module.css";
 
-const JobApplicationModal: React.FC = () => {
+type JobApplicationProps = {
+  onClose: () => void;
+  onSubmit: () => void;
+};
+
+const JobApplicationModal: React.FC<JobApplicationProps> = ({
+  onClose,
+  onSubmit,
+}) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,7 +46,6 @@ const JobApplicationModal: React.FC = () => {
     }
   };
 
-  // TODO:
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -46,108 +53,101 @@ const JobApplicationModal: React.FC = () => {
       alert("Please upload your resume.");
       return;
     }
-  };
 
-  const handleClose = () => {
-    alert("Add Modal close logic");
+    // Handle form submission logic here
+    onSubmit();
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.modal}>
-          <h1>Job Application Form</h1>
-          <form onSubmit={handleSubmit}>
-            <div className={styles.inputsContainer}>
-              <p>First Name</p>
-              <label htmlFor="firstName">
-                <input
-                  className={styles.input}
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={firstName}
-                  onChange={handleFirstNameChange}
-                />
-              </label>
+    <div className={styles.container}>
+      <div className={styles.modal}>
+        <h1>Job Application Form</h1>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.inputsContainer}>
+            <p>First Name</p>
+            <label htmlFor="firstName">
+              <input
+                className={styles.input}
+                type="text"
+                id="firstName"
+                name="firstName"
+                value={firstName}
+                onChange={handleFirstNameChange}
+              />
+            </label>
 
-              <p>Last Name</p>
-              <label htmlFor="lastName">
-                <input
-                  className={styles.input}
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={lastName}
-                  onChange={handleLastNameChange}
-                />
-              </label>
+            <p>Last Name</p>
+            <label htmlFor="lastName">
+              <input
+                className={styles.input}
+                type="text"
+                id="lastName"
+                name="lastName"
+                value={lastName}
+                onChange={handleLastNameChange}
+              />
+            </label>
 
-              <p>Email</p>
-              <label htmlFor="email">
-                <input
-                  className={styles.input}
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={email}
-                  onChange={handleEmailChange}
-                />
-              </label>
+            <p>Email</p>
+            <label htmlFor="email">
+              <input
+                className={styles.input}
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </label>
 
-              <p>Phone Number</p>
-              <label htmlFor="phoneNumber">
-                <input
-                  className={styles.input}
-                  type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={phoneNumber}
-                  onChange={handlePhoneNumberChange}
-                />
-              </label>
+            <p>Phone Number</p>
+            <label htmlFor="phoneNumber">
+              <input
+                className={styles.input}
+                type="tel"
+                id="phoneNumber"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumberChange}
+              />
+            </label>
 
-              <p>Cover Letter</p>
-              <label htmlFor="coverLetter">
-                <textarea
-                  className={styles.textarea}
-                  id="coverLetter"
-                  name="coverLetter"
-                  value={coverLetter}
-                  onChange={handleCoverLetterChange}
-                />
-              </label>
+            <p>Cover Letter</p>
+            <label htmlFor="coverLetter">
+              <textarea
+                className={styles.textarea}
+                id="coverLetter"
+                name="coverLetter"
+                value={coverLetter}
+                onChange={handleCoverLetterChange}
+              />
+            </label>
 
-              <p>Resume</p>
-
-              <label htmlFor="resume" className={styles.customFileButton}>
-                <input
-                  className={styles.resume_input}
-                  type="file"
-                  id="resume"
-                  name="resume"
-                  onChange={handleResumeFileChange}
-                />
-                <span>Upload Resume</span>
-              </label>
-            </div>
-            <div className={styles.button_styles}>
-              <button
-                type="button"
-                className={styles.button}
-                onClick={handleClose}
-              >
-                Close
-              </button>
-              <button className={styles.button} type="submit">
-                Submit
-              </button>
-            </div>
-          </form>
-        </div>
+            <p>Resume</p>
+            <label htmlFor="resume" className={styles.customFileButton}>
+              <input
+                className={styles.resume_input}
+                type="file"
+                id="resume"
+                name="resume"
+                onChange={handleResumeFileChange}
+              />
+              <span>Upload Resume</span>
+            </label>
+          </div>
+          <div className={styles.button_styles}>
+            <button type="button" className={styles.button} onClick={onClose}>
+              Close
+            </button>
+            <button className={styles.button} type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 
 export default JobApplicationModal;
+

@@ -8,6 +8,7 @@
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
+  z-index: 1100; /* Higher than the header's z-index */
 }
 
 .modal {
@@ -16,7 +17,8 @@
   border-radius: 8px;
   width: 700px;
   max-width: 100%;
-  height: auto;
+  max-height: 80vh; /* Set a max height */
+  overflow-y: auto; /* Add vertical scrolling */
 }
 
 .inputs {
@@ -85,3 +87,6 @@
 .button:hover {
   background-color: #f0f0f0;
 }
+
+
+

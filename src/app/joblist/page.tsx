@@ -10,7 +10,12 @@ import { useState } from "react";
 const JobListPage: NextPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleApplyClick = () => {};
+  const handleOnClose = () => {
+    setIsModalOpen(false);
+  };
+
+  // TODO:
+  const handleOnSubmit = async () => {};
 
   const dummyJobs = [
     {
@@ -20,7 +25,7 @@ const JobListPage: NextPage = () => {
       salary: "157,000",
     },
     {
-      title: "Marketing Specalist",
+      title: "Marketing Specialist",
       company: "Uniqlo",
       location: "Los Angeles",
       salary: "77,000",
@@ -28,7 +33,7 @@ const JobListPage: NextPage = () => {
     {
       title: "Data Scientist",
       company: "OpenAI",
-      location: "San Franscisco",
+      location: "San Francisco",
       salary: "127,000",
     },
     {
@@ -38,7 +43,7 @@ const JobListPage: NextPage = () => {
       salary: "157,000",
     },
     {
-      title: "Marketing Specalist",
+      title: "Marketing Specialist",
       company: "Uniqlo",
       location: "Los Angeles",
       salary: "77,000",
@@ -46,10 +51,11 @@ const JobListPage: NextPage = () => {
     {
       title: "Data Scientist",
       company: "OpenAI",
-      location: "San Franscisco",
+      location: "San Francisco",
       salary: "127,000",
     },
   ];
+
   return (
     <div className={styles.page}>
       <Header />
@@ -64,12 +70,20 @@ const JobListPage: NextPage = () => {
               company={job.company}
               location={job.location}
               salary={job.salary}
+              onClickApply={() => setIsModalOpen(true)}
             />
           </div>
         ))}
       </div>
+      {isModalOpen && (
+        <JobApplicationModal
+          onClose={handleOnClose}
+          onSubmit={handleOnSubmit}
+        />
+      )}
     </div>
   );
 };
 
 export default JobListPage;
+

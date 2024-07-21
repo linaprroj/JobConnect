@@ -1,7 +1,10 @@
 .page {
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  align-items: center;
+  padding: 2rem;
+  padding-top: 6rem; /* Manually push down the content */
+  margin-top: 3rem; /* Adjust position on the page */
 }
 
 .job_container {

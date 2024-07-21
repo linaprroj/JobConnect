@@ -4,10 +4,14 @@
   align-items: center;
   padding: 0.5rem 2rem;
   background-color: #fff;
-  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   color: #333;
   height: 4.5rem;
+  width: 100%; /* Make the header fill the entire width */
+  position: fixed; /* Fix the header at the top */
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure it stays on top of other elements */
 }
 
 .left_side {
@@ -47,6 +51,7 @@
 .right_side {
   display: flex;
   align-items: center;
+  margin-right: 3.5rem; /* Adjust this value if needed */
 }
 
 .button_styles {
@@ -66,8 +71,13 @@
   transition: background-color 0.3s, color 0.3s;
   font-size: 0.9rem;
   text-align: center;
+  margin-left: 2rem; /* Add margin to move the buttons to the right */
 }
 
 .button:hover {
   background-color: #f0f0f0;
 }
+
+
+
+
