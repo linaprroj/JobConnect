@@ -1,4 +1,3 @@
-Sure! Here's an updated and more visually appealing version of your README file:
 
 ---
 
