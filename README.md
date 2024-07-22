@@ -115,5 +115,3 @@ This project is licensed under the MIT License.
 
 
 ---
-
-Feel free to copy this template and make any additional changes or customizations as needed. Save the file as `README.md` in your project directory.
