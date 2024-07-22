@@ -68,10 +68,10 @@ Ensure you have the following installed:
     CREATE DATABASE JobConnect;
     ```
 
-5. **Initialize the database:**
+5. **Restore the database from the backup file:**
 
     ```bash
-    python init_db.py
+    mysql -u root -p JobConnect < JobConnect_backup.sql
     ```
 
 6. **Run the Flask server:**
@@ -108,10 +108,8 @@ Ensure you have the following installed:
 2. **API interactions:**
    Use `http://localhost:5000` for backend API interactions.
 
-
 ## 📜 License
 
 This project is licensed under the MIT License.
-
 
 ---
