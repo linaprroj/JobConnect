@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.job_offerer import JobOfferer
+from updated_models.job_offerer import JobOfferer
 from app_init import db
 
 job_offerer_bp = Blueprint('job_offerer_bp', __name__)

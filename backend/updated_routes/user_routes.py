@@ -1,6 +1,5 @@
-# routes/user_routes.py
 from flask import Blueprint, request, jsonify
-from models.user import User
+from updated_models.user import User
 from app_init import db
 
 user_bp = Blueprint('user_bp', __name__)
@@ -21,7 +20,11 @@ def get_user_by_id(id):
 @user_bp.route('/users', methods=['POST'])
 def create_user():
     data = request.get_json()
-    new_user = User(username=data['username'], email=data['email'])
+    new_user = User(
+        email=data['email'],
+        password=data['password'],  # Password will be hashed by the model
+        user_type=data['user_type']
+    )
     db.session.add(new_user)
     db.session.commit()
     return jsonify(new_user.to_dict()), 201
@@ -31,8 +34,10 @@ def create_user():
 def update_user(id):
     user = User.query.get_or_404(id)
     data = request.get_json()
-    user.username = data.get('username', user.username)
     user.email = data.get('email', user.email)
+    if 'password' in data:
+        user.password = data['password']  # Password will be hashed by the model
+    user.user_type = data.get('user_type', user.user_type)
     db.session.commit()
     return jsonify(user.to_dict())
 
@@ -44,13 +49,13 @@ def delete_user(id):
     db.session.commit()
     return jsonify({'message': 'User deleted successfully'}), 204
 
-# Helper method to convert User object to dictionary
-def to_dict(self):
-    return {
-        'id': self.id,
-        'username': self.username,
-        'email': self.email
-    }
+# Login route to authenticate user
+@user_bp.route('/login', methods=['POST'])
+def login():
+    data = request.get_json()
+    user = User.query.filter_by(email=data['email']).first()
+    if user and user.verify_password(data['password']):
+        return jsonify({'message': 'Login successful', 'user': user.to_dict()}), 200
+    else:
+        return jsonify({'message': 'Invalid email or password'}), 401
 
-# Add to_dict method to User model
-User.to_dict = to_dict

@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.message import Message
+from updated_models.messages import Message
 from app_init import db
 
 message_bp = Blueprint('message_bp', __name__)

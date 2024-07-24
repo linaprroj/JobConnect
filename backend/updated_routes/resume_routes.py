@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.resume import Resume
+from updated_models.resume import Resume
 from app_init import db
 
 resume_bp = Blueprint('resume_bp', __name__)

@@ -1,6 +1,5 @@
-#routes/job_posting_routes.py
 from flask import Blueprint, request, jsonify
-from models.job_posting import JobPosting
+from updated_models.job_posting import JobPosting
 from app_init import db
 from datetime import datetime
 
@@ -22,13 +21,14 @@ def create_job_posting():
     new_job_posting = JobPosting(
         employer_id=data['employer_id'],
         job_title=data['job_title'],
-        job_desc=data.get('job_desc'),
+        company_name=data['company_name'],
+        description=data.get('description'),
         requirements=data.get('requirements'),
         location=data.get('location'),
-        date_posted=datetime.fromisoformat(data['date_posted']),
-        salary_range=data.get('salary_range'),
-        job_type=data.get('job_type'),
-        application_deadline=datetime.fromisoformat(data['application_deadline']) if data.get('application_deadline') else None
+        salary=data.get('salary'),
+        created_at=datetime.fromisoformat(data['created_at']) if data.get('created_at') else None,
+        updated_at=datetime.fromisoformat(data['updated_at']) if data.get('updated_at') else None,
+        deleted_at=datetime.fromisoformat(data['deleted_at']) if data.get('deleted_at') else None
     )
     db.session.add(new_job_posting)
     db.session.commit()
@@ -40,13 +40,14 @@ def update_job_posting(id):
     data = request.get_json()
     job_posting.employer_id = data.get('employer_id', job_posting.employer_id)
     job_posting.job_title = data.get('job_title', job_posting.job_title)
-    job_posting.job_desc = data.get('job_desc', job_posting.job_desc)
+    job_posting.company_name = data.get('company_name', job_posting.company_name)
+    job_posting.description = data.get('description', job_posting.description)
     job_posting.requirements = data.get('requirements', job_posting.requirements)
     job_posting.location = data.get('location', job_posting.location)
-    job_posting.date_posted = datetime.fromisoformat(data['date_posted']) if data.get('date_posted') else job_posting.date_posted
-    job_posting.salary_range = data.get('salary_range', job_posting.salary_range)
-    job_posting.job_type = data.get('job_type', job_posting.job_type)
-    job_posting.application_deadline = datetime.fromisoformat(data['application_deadline']) if data.get('application_deadline') else job_posting.application_deadline
+    job_posting.salary = data.get('salary', job_posting.salary)
+    job_posting.created_at = datetime.fromisoformat(data['created_at']) if data.get('created_at') else job_posting.created_at
+    job_posting.updated_at = datetime.fromisoformat(data['updated_at']) if data.get('updated_at') else job_posting.updated_at
+    job_posting.deleted_at = datetime.fromisoformat(data['deleted_at']) if data.get('deleted_at') else job_posting.deleted_at
     db.session.commit()
     return jsonify(job_posting.to_dict())
 
@@ -63,14 +64,16 @@ def to_dict(self):
         'id': self.id,
         'employer_id': self.employer_id,
         'job_title': self.job_title,
-        'job_desc': self.job_desc,
+        'company_name': self.company_name,
+        'description': self.description,
         'requirements': self.requirements,
         'location': self.location,
-        'date_posted': self.date_posted.isoformat(),
-        'salary_range': self.salary_range,
-        'job_type': self.job_type,
-        'application_deadline': self.application_deadline.isoformat() if self.application_deadline else None
+        'salary': self.salary,
+        'created_at': self.created_at.isoformat() if self.created_at else None,
+        'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+        'deleted_at': self.deleted_at.isoformat() if self.deleted_at else None
     }
 
 # Add to_dict method to JobPosting model
 JobPosting.to_dict = to_dict
+

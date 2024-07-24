@@ -8,6 +8,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable modification tracking
+    app.config['SECRET_KEY'] = 'pass4JobConnect!'
 
     db.init_app(app)  # Bind SQLAlchemy to the Flask app
 

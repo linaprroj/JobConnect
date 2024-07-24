@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.interview import Interview
+from updated_models.interviews import Interview
 from app_init import db
 from datetime import datetime
 

@@ -1,6 +1,6 @@
 from app_init import db
 
-class JobOffer(db.Model):
+class JobPosting(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     employer_id = db.Column(db.Integer, db.ForeignKey('job_offerer.id'), nullable=False)
     job_title = db.Column(db.String(100), nullable=False)
