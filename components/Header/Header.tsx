@@ -13,13 +13,13 @@ const Header: React.FC = () => {
         <nav>
           <ul className={styles.nav}>
             <li>
-              <Link href="/" className={styles.nav_link}>
-                Home
+              <Link href="/messages" className={styles.nav_link}>
+                Messages
               </Link>
             </li>
             <li>
-              <Link href="/joblist" className={styles.nav_link}>
-                Jobs
+              <Link href="/interviews" className={styles.nav_link}>
+                Interviews
               </Link>
             </li>
             <li>
@@ -51,5 +51,7 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
+
 
 

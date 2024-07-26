@@ -21,6 +21,7 @@ const AuthPage: NextPage = () => {
     if (mockResponse.ok) {
       console.log(isLogin ? "Login successful" : "Signup successful");
       alert(isLogin ? "Login successful" : "Signup successful");
+      router.push("/"); // Redirect to home page after successful login or signup
     } else {
       alert(isLogin ? "Login failed" : "Signup failed");
     }
@@ -61,6 +62,7 @@ const AuthPage: NextPage = () => {
 };
 
 export default AuthPage;
+
 
 
 

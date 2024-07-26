@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import Header from "../../../../components/Header/Header";
 import styles from "../../../../styles/RecruiterReviewListings.module.css";
 
@@ -29,10 +30,6 @@ const sampleJobs = [
 ];
 
 const RecruiterReviewListings: React.FC = () => {
-  const handleReviewCandidates = (jobId: number) => {
-    console.log("Review candidates for job:", jobId);
-  };
-
   const handleDeleteListing = (jobId: number) => {
     console.log("Delete listing for job:", jobId);
   };
@@ -49,9 +46,11 @@ const RecruiterReviewListings: React.FC = () => {
             <p>Location: {job.location}</p>
             <p>Salary: ${job.salary}</p>
             <div className={styles.buttonContainer}>
-              <button className={styles.button} onClick={() => handleReviewCandidates(job.id)}>
-                Review Candidates
-              </button>
+              <Link href={`/recruiter/review?jobId=${job.id}`}>
+                <button className={styles.button}>
+                  Review Candidates
+                </button>
+              </Link>
               <button className={styles.button} onClick={() => handleDeleteListing(job.id)}>
                 Delete Listing
               </button>
@@ -64,5 +63,6 @@ const RecruiterReviewListings: React.FC = () => {
 };
 
 export default RecruiterReviewListings;
+
 
 
